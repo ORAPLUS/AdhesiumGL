@@ -1,4 +1,4 @@
-package org.sid.security;
+package org.sid.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityServices extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private DataSource dataSource;
