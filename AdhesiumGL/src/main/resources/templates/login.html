@@ -16,9 +16,8 @@
 <link rel="stylesheet" type="text/css"
 	href="../static/font-awesome/css/font-awesome.css"
 	th:href="@{/font-awesome/css/font-awesome.css}" />
-<link
-	href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'
-	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,800"/>
 </head>
 <body>
 	<div id="loginbox">
@@ -30,12 +29,12 @@
 			<button class="close" data-dismiss="alert">×</button>
 			<strong>Success!</strong> Vous êtes maintenant déconnecté.
 		</div>
-		<div class="alert alert-info" th:if="${forget} == true">
+		<div class="alert alert-info" th:if="${forgot} == true">
 			<button class="close" data-dismiss="alert">×</button>
 			<strong>Info!</strong> Votre mot de passe a été envoyé à l'adresse
 			email indiquée.
 		</div>
-		<div class="alert alert-error" th:if="${forget} == false">
+		<div class="alert alert-error" th:if="${forgot} == false">
 			<button class="close" data-dismiss="alert">×</button>
 			<strong>Error!</strong> Cette adresse email n'existe pas.
 		</div>
@@ -43,7 +42,7 @@
 			method="POST">
 			<div class="control-group normal_text">
 				<h3>
-					<img src="img/logo.png" alt="Logo" />
+					<img src="../static/img/logo.png" th:src="@{/img/logo.png}" alt="Logo" />
 				</h3>
 			</div>
 			<div class="control-group">
@@ -67,10 +66,11 @@
 					class="flip-link btn btn-info" id="to-recover">Compte oubliées
 						?</a></span> <span class="pull-right"><button class="btn btn-success"
 						type="submit">Connexion</button></span>
-
+        <label for="field1" th:text="#{field1}"></label>
+        <label for="field2" th:text="#{field2}"></label>
 			</div>
 		</form>
-		<form id="recoverform" th:action="@{/forget}" method="POST"
+		<form id="recoverform" th:action="@{/forgot}" method="POST"
 			class="form-vertical">
 			<p class="normal_text">Entrez votre adresse e-mail ci-dessous et
 				nous allons vous envoyer une instructions sur la façon de récupérer

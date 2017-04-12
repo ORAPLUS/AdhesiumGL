@@ -33,9 +33,12 @@ public class AdhesiumGlApplication implements CommandLineRunner {
 	@Override
 	public void run(String... arg0) throws Exception {
 		PasswordEncoder encoder = new Md5PasswordEncoder();
-		String password = encoder.encodePassword("123456", null);
-		User superAdmin = new User("ADMIN",password ,"ayoub@adhesium.com", 1, 1, new Date(), 1, new Date());
+		String superAdminPassword = encoder.encodePassword("123456", null);
+		User superAdmin = new User("ADMIN",superAdminPassword ,"ayoub@adhesium.com", 1, 1, new Date(), 1, new Date());
 		userRepository.save(superAdmin);
+		String superAdminPassword1 = encoder.encodePassword("123456", null);
+		User superAdmin1 = new User("أيوب",superAdminPassword1 ,"ayoub@adhesium.com", 1, 1, new Date(), 1, new Date());
+		userRepository.save(superAdmin1);
 		Role roleAdmin = new Role("ADMIN", 1, 1, new Date(), 1, new Date());
 		roleRepository.save(roleAdmin);
 		Role roleUser = new Role("USER", 1, 1, new Date(), 1, new Date());
