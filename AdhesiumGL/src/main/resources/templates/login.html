@@ -40,12 +40,14 @@
 		<form id="loginform" class="form-vertical" th:action="@{/login}"
 			method="POST" enctype="multipart/form-data;charset=UTF-8">
 			<div class="control-group normal_text">
-				<a th:href="@{/login?lang=fr}"><img alt="FR"
-					th:src="@{/img/demo/fr.png}" height="40" width="40" /> </a> <a
-					th:href="@{/login?lang=en}"><img alt="EN"
-					th:src="@{/img/demo/en.png}" height="40" width="40" /> </a> <a
-					th:href="@{/login?lang=ar}"><img alt="AR"
-					th:src="@{/img/demo/ar.png}" height="40" width="40" /> </a>
+				<!--open-top-lang-menu-->
+				<a th:title="#{fr}" th:href="@{/login?lang=fr}"><img
+					th:alt="#{fr}" th:src="@{/img/demo/fr.png}" height="40" width="40" /></a>
+				<a th:title="#{en}" th:href="@{/login?lang=en}"><img
+					th:alt="#{en}" th:src="@{/img/demo/en.png}" height="40" width="40" /></a>
+				<a th:title="#{ar}" th:href="@{/login?lang=ar}"><img
+					th:alt="#{ar}" th:src="@{/img/demo/ar.png}" height="40" width="40" /></a>
+				<!--close-top-lang-menu-->
 			</div>
 			<div class="control-group normal_text">
 				<h3>
@@ -83,22 +85,23 @@
 		</form>
 		<form id="recoverform" th:action="@{/forgot}" method="POST"
 			class="form-vertical">
-			<p class="normal_text">Entrez votre adresse e-mail ci-dessous et
-				nous allons vous envoyer une instructions sur la façon de récupérer
-				votre mot de passe.</p>
+			<p class="normal_text" th:text="#{template.message.forgot.text}"></p>
 
 			<div class="controls">
 				<div class="main_input_box">
 					<span class="add-on bg_lo"><i class="icon-envelope"></i></span><input
-						type="text" placeholder="Entrez votre adresse e-mail" name="email" />
+						type="text" th:placeholder="#{template.message.forgot.email.text}"
+						name="email" />
 				</div>
 			</div>
 
 			<div class="form-actions">
 				<span class="pull-left"><a href="#"
-					class="flip-link btn btn-success" id="to-login">&laquo; Retour
-						login</a></span> <span class="pull-right">
-					<button class="btn btn-info" type="submit">Récupérer</button>
+					class="flip-link btn btn-success" id="to-login"
+					th:text="'&laquo; '+#{template.message.forgot.retour.text}"> </a></span> <span
+					class="pull-right">
+					<button class="btn btn-info" type="submit"
+						th:text="#{template.message.forgot.recuperer.text}"></button>
 				</span>
 			</div>
 		</form>

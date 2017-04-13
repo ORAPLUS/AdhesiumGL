@@ -1,24 +1,232 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Adhesium Technologies (Wellcom) :: Gestion des Licences</title>
+<title th:text="#{title.page.home}"></title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-<link rel="stylesheet" href="css/matrix-login.css" />
-<link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/bootstrap-responsive.min.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/fullcalendar.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/fullcalendar.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/matrix-style.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/matrix-media.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/jquery.gritter.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet"
+	type="text/css" />
 <link
-	href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800'
-	rel='stylesheet' type='text/css' />
-
+	href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,800"
+	rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<div id="loginbox">
-		Hello World!
+
+	<!--Header-part-->
+	<div id="header">
+		<h1>
+			<a href="#" th:text="#{company}" th:title="#{company}"></a>
+		</h1>
+	</div>
+	<!--close-Header-part-->
+
+
+	<!--top-Header-menu-->
+	<div id="user-nav" class="navbar navbar-inverse">
+		<ul class="nav">
+			<li class="dropdown" id="profile-messages"><a href="#"
+				data-toggle="dropdown" data-target="#profile-messages"
+				class="dropdown-toggle"><i class="icon icon-user"></i> <span
+					class="text" th:text="#{template.message.bienvennu}"></span> <span
+					th:text="#{template.message.bienvennu}"></span><b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="#"><i class="icon-user"></i> <span
+							th:text="#{template.top.header.menu.profil}"></span></a></li>
+				</ul></li>
+			<li class=""><a
+				th:title="#{template.top.header.menu.configuration}" href="#"><i
+					class="icon icon-cog"></i> <span class="text"
+					th:text="#{template.top.header.menu.configuration}"></span></a></li>
+			<li class=""><a
+				th:title="#{template.top.header.menu.deconnecter}" href="#"><i
+					class="icon icon-share-alt"></i> <span class="text"
+					th:text="#{template.top.header.menu.deconnecter}"></span></a></li>
+		</ul>
+	</div>
+	<!--close-top-Header-menu-->
+	<!--start-top-serch-->
+	<div id="search">
+		<!--open-top-lang-menu-->
+		<a th:title="#{fr}" th:href="@{/login?lang=fr}"><img
+			th:alt="#{fr}" th:src="@{/img/demo/fr.png}" height="30" width="30" /></a>
+		<a th:title="#{en}" th:href="@{/login?lang=en}"><img
+			th:alt="#{en}" th:src="@{/img/demo/en.png}" height="30" width="30" /></a>
+		<a th:title="#{ar}" th:href="@{/login?lang=ar}"><img
+			th:alt="#{ar}" th:src="@{/img/demo/ar.png}" height="30" width="30" /></a>
+		<!--close-top-lang-menu-->
+	</div>
+	<!--close-top-serch-->
+	<!--sidebar-menu-->
+	<div id="sidebar">
+		<a href="#" class="visible-phone"><i class="icon icon-home"></i><span
+			th:text="#{template.home.text}"></span></a>
+		<ul>
+			<li class="active"><a th:href="@{/}"><i
+					class="icon icon-home"></i> <span th:text="#{template.home.text}"></span></a></li>
+			<li><a href="#"><i class="icon icon-group"></i> <span>Gestion
+						des Clients</span></a></li>
+			<li><a href="#"><i class="icon icon-shopping-cart"></i> <span>Gestion
+						des Paniers</span></a></li>
+			<li><a href="#"><i class="icon icon-key"></i> <span>Gestion
+						des Produits</span></a></li>
+			<li class="submenu"><a href="#"><i
+					class="icon icon-dashboard"></i> <span>Administration</span> <span
+					class="label label-important">3</span></a>
+				<ul>
+					<li><a href="#"><i class="icon icon-user-md"></i>
+							Utilisateurs</a></li>
+					<li><a href="#"><i class="icon icon-pushpin"></i> Roles</a></li>
+					<li><a href="#"><i class="icon icon-lock"></i> Privileges</a></li>
+				</ul></li>
+			<li><a href="#"><i class="icon icon-signal"></i> <span>Statistiques</span></a></li>
+			<li><a href="#"><i class="icon icon-cog"></i><span
+					th:text="#{template.top.header.menu.configuration}"></span></a></li>
+		</ul>
+	</div>
+	<!--sidebar-menu-->
+
+	<!--main-container-part-->
+	<div id="content">
+		<!--breadcrumbs-->
+		<div id="content-header">
+			<div id="breadcrumb">
+				<a th:href="@{/}" th:title="#{template.home.text}"
+					class="tip-bottom"><i class="icon-home"></i> <span
+					th:text="#{template.home.text}"></span></a>
+			</div>
+		</div>
+		<!--End-breadcrumbs-->
+
+		<!--Action boxes-->
+		<div class="container-fluid">
+
+			<div class="row-fluid">
+				<div class="widget-box">
+					<div class="widget-title bg_lg">
+						<span class="icon"><i class="icon-star"></i></span>
+						<h5 th:text="#{template.menu.fast}"></h5>
+					</div>
+					<div class="widget-content">
+						<div class="row-fluid">
+							<div class="quick-actions_homepage">
+								<ul class="quick-actions">
+									<li class="bg_ls"><a href="#"> <i
+											class="icon-dashboard"></i> <span
+											class="label label-important">20</span> Menu rapide 1
+									</a></li>
+									<li class="bg_ls"><a href="#"> <i class="icon-signal"></i>
+											Menu rapide 2
+									</a></li>
+									<li class="bg_ls"><a href="#"> <i class="icon-inbox"></i><span
+											class="label label-important">10</span> Menu rapide 3
+									</a></li>
+									<li class="bg_ls"><a href="#"> <i class="icon-th"></i>
+											Menu rapide 4
+									</a></li>
+									<li class="bg_ls"><a href="#"> <i
+											class="icon-fullscreen"></i> Menu rapide 5
+									</a></li>
+									<li class="bg_ls"><a href="#"> <i class="icon-th-list"></i>
+											Menu rapide 6
+									</a></li>
+									<li class="bg_ls"><a href="#"> <i class="icon-tint"></i>
+											Menu rapide 7
+									</a></li>
+									<li class="bg_ls"><a href="#"> <i class="icon-pencil"></i>
+											Menu rapide 8
+									</a></li>
+									<li class="bg_ls"><a href="#"> <i
+											class="icon-calendar"></i> Menu rapide 9
+									</a></li>
+									<li class="bg_ls"><a href="#"> <i
+											class="icon-info-sign"></i> Menu rapide 10
+									</a></li>
+									<li class="bg_lh"><a href="#"> <i
+											class="icon icon-share-alt"></i> Déconnexion
+									</a></li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--End-Chart-box-->
+		</div>
 	</div>
 
-</body>
+	<!--end-main-container-part-->
 
+	<!--Footer-part-->
+
+	<div class="row-fluid">
+		<div id="footer" class="span12">
+			<span th:text="#{year} +' &copy; '+ #{company}+' '+ #{site.info}"></span>
+			<a href="#" th:text="#{creator}"></a>
+		</div>
+	</div>
+
+	<!--end-Footer-part-->
+
+	<script th:src="@{/js/excanvas.min.js}"></script>
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/jquery.ui.custom.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/jquery.flot.min.js}"></script>
+	<script th:src="@{/js/jquery.flot.resize.min.js}"></script>
+	<script th:src="@{/js/jquery.peity.min.js}"></script>
+	<script th:src="@{/js/fullcalendar.min.js}"></script>
+	<script th:src="@{/js/matrix.js}"></script>
+	<script th:src="@{/js/matrix.dashboard.js}"></script>
+	<script th:src="@{/js/jquery.gritter.min.js}"></script>
+	<!-- <script th:src="@{/js/matrix.interface.js}"></script> -->
+	<script th:src="@{/js/matrix.chat.js}"></script>
+	<script th:src="@{/js/jquery.validate.js}"></script>
+	<script th:src="@{/js/matrix.form_validation.js}"></script>
+	<script th:src="@{/js/jquery.wizard.js}"></script>
+	<script th:src="@{/js/jquery.uniform.js}"></script>
+	<script th:src="@{/js/select2.min.js}"></script>
+	<script th:src="@{/js/matrix.popover.js}"></script>
+	<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/js/matrix.tables.js}"></script>
+
+	<script type="text/javascript">
+		// This function is called from the pop-up menus to transfer to
+		// a different page. Ignore if the value returned is a null string:
+		function goPage(newURL) {
+
+			// if url is empty, skip the menu dividers and reset the menu selection to default
+			if (newURL != "") {
+
+				// if url is "-", it is this page -- reset the menu:
+				if (newURL == "-") {
+					resetMenu();
+				}
+				// else, send page to designated URL            
+				else {
+					document.location.href = newURL;
+				}
+			}
+		}
+
+		// resets the menu selection upon entry to this page:
+		function resetMenu() {
+			document.gomenu.selector.selectedIndex = 2;
+		}
+	</script>
+</body>
 </html>
