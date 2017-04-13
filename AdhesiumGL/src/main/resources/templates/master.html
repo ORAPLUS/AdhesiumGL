@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/bootstrap-responsive.min.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/fullcalendar.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/fullcalendar.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/matrix-style.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/matrix-media.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/jquery.gritter.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet"
+	type="text/css" />
+<link
+	href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,800"
+	rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<!-- open.master -->
+	<header th:include="theme/header::body"></header>
+	<section th:include="theme/nav_menu::body"></section>
+	<section id="content" layout:fragment="content"></section>
+	<footer th:include="theme/footer::body"></footer>
+	<!-- close.master -->
+	<script th:src="@{/js/excanvas.min.js}"></script>
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/jquery.ui.custom.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/jquery.flot.min.js}"></script>
+	<script th:src="@{/js/jquery.flot.resize.min.js}"></script>
+	<script th:src="@{/js/jquery.peity.min.js}"></script>
+	<script th:src="@{/js/fullcalendar.min.js}"></script>
+	<script th:src="@{/js/matrix.js}"></script>
+	<script th:src="@{/js/matrix.dashboard.js}"></script>
+	<script th:src="@{/js/jquery.gritter.min.js}"></script>
+	<!-- <script th:src="@{/js/matrix.interface.js}"></script> -->
+	<script th:src="@{/js/matrix.chat.js}"></script>
+	<script th:src="@{/js/jquery.validate.js}"></script>
+	<script th:src="@{/js/matrix.form_validation.js}"></script>
+	<script th:src="@{/js/jquery.wizard.js}"></script>
+	<script th:src="@{/js/jquery.uniform.js}"></script>
+	<script th:src="@{/js/select2.min.js}"></script>
+	<script th:src="@{/js/matrix.popover.js}"></script>
+	<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/js/matrix.tables.js}"></script>
+
+	<script type="text/javascript">
+		// This function is called from the pop-up menus to transfer to
+		// a different page. Ignore if the value returned is a null string:
+		function goPage(newURL) {
+
+			// if url is empty, skip the menu dividers and reset the menu selection to default
+			if (newURL != "") {
+
+				// if url is "-", it is this page -- reset the menu:
+				if (newURL == "-") {
+					resetMenu();
+				}
+				// else, send page to designated URL            
+				else {
+					document.location.href = newURL;
+				}
+			}
+		}
+
+		// resets the menu selection upon entry to this page:
+		function resetMenu() {
+			document.gomenu.selector.selectedIndex = 2;
+		}
+	</script>
+</body>
+</html>

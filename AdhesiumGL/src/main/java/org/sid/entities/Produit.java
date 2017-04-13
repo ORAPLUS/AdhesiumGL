@@ -3,6 +3,7 @@ package org.sid.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,59 +11,47 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="t_roles")
-public class Role implements Serializable{
+@Table(name="t_produits")
+public class Produit implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
 	@Id @GeneratedValue
-	private Long id_role;
-	private String nom_role;
-	private int enabled;
+	private Long id_produit;
+	private String nom;
 	private Long userCreator;
 	private Date dateCreation;
 	private Long userUpdator;
 	private Date dateUpdate;
+	@OneToMany(mappedBy="produit")
+	private Collection<Panier> paniers;
 
-	@OneToMany(mappedBy="role")
-	private Collection<Privilege> privileges;
-	
-	public Role(String nom_role, int enabled, Long userCreator, Date dateCreation, Long userUpdator, Date dateUpdate) {
+	public Produit() {
 		super();
-		this.nom_role = nom_role;
-		this.enabled = enabled;
+	}
+
+	public Produit(String nom, Long userCreator, Date dateCreation, Long userUpdator, Date dateUpdate) {
+		super();
+		this.nom = nom;
 		this.userCreator = userCreator;
 		this.dateCreation = dateCreation;
 		this.userUpdator = userUpdator;
 		this.dateUpdate = dateUpdate;
 	}
 
-	public Role() {
-		super();
+	public Long getId_produit() {
+		return id_produit;
 	}
 
-	public Long getId_role() {
-		return id_role;
+	public void setId_produit(Long id_produit) {
+		this.id_produit = id_produit;
 	}
 
-	public void setId_role(Long id_role) {
-		this.id_role = id_role;
+	public String getNom() {
+		return nom;
 	}
 
-	public String getNom_role() {
-		return nom_role;
-	}
-
-	public void setNom_role(String nom_role) {
-		this.nom_role = nom_role;
-	}
-
-	public int getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(int enabled) {
-		this.enabled = enabled;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	public Long getUserCreator() {
@@ -97,12 +86,12 @@ public class Role implements Serializable{
 		this.dateUpdate = dateUpdate;
 	}
 
-	public Collection<Privilege> getPrivileges() {
-		return privileges;
+	public Collection<Panier> getPaniers() {
+		return paniers;
 	}
 
-	public void setPrivileges(Collection<Privilege> privileges) {
-		this.privileges = privileges;
+	public void setPaniers(Collection<Panier> paniers) {
+		this.paniers = paniers;
 	}
 	
 	

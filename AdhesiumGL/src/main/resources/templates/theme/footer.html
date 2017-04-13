@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+	<!--Footer-part-->
+		<div class="row-fluid">
+			<div id="footer" class="span12">
+				<span th:text="#{year} +' &copy; '+ #{company}+' '+ #{site.info}"></span>
+				<a href="#" th:text="#{creator}"></a>
+			</div>
+		</div>
+		<!--end-Footer-part-->
+</body>
+</html>

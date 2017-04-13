@@ -17,9 +17,9 @@ public class Privilege implements Serializable {
 	
 	@Id @GeneratedValue
 	private Long id;
-	private int userCreator;
+	private Long userCreator;
 	private Date dateCreation;
-	private int userUpdator;
+	private Long userUpdator;
 	private Date dateUpdate;
 
 	@ManyToOne
@@ -33,7 +33,7 @@ public class Privilege implements Serializable {
 		super();
 	}
 	
-	public Privilege(int userCreator, Date dateCreation, int userUpdator, Date dateUpdate, User user, Role role) {
+	public Privilege(Long userCreator, Date dateCreation, Long userUpdator, Date dateUpdate, User user, Role role) {
 		super();
 		this.userCreator = userCreator;
 		this.dateCreation = dateCreation;
@@ -49,10 +49,10 @@ public class Privilege implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getUserCreator() {
+	public Long getUserCreator() {
 		return userCreator;
 	}
-	public void setUserCreator(int userCreator) {
+	public void setUserCreator(Long userCreator) {
 		this.userCreator = userCreator;
 	}
 	public Date getDateCreation() {
@@ -61,10 +61,10 @@ public class Privilege implements Serializable {
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-	public int getUserUpdator() {
+	public Long getUserUpdator() {
 		return userUpdator;
 	}
-	public void setUserUpdator(int userUpdator) {
+	public void setUserUpdator(Long userUpdator) {
 		this.userUpdator = userUpdator;
 	}
 	public Date getDateUpdate() {

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="master">
+<head>
+<title th:text="#{title.page.home}"></title>
+</head>
+<body>
+	<section id="content" layout:fragment="content">
+	<!--main-container-part-->
+			<!--breadcrumbs-->
+			<div id="content-header">
+				<div id="breadcrumb">
+					<a th:href="@{/}" th:title="#{template.home.text}"
+						class="tip-bottom"><i class="icon-home"></i> <span
+						th:text="#{template.home.text}"></span></a>
+				</div>
+			</div>
+			<!--End-breadcrumbs-->
+			<!--Action boxes-->
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="widget-box">
+						<div class="widget-title bg_lg">
+							<span class="icon"><i class="icon-star"></i></span>
+							<h5 th:text="#{template.menu.fast}"></h5>
+						</div>
+						<div class="widget-content">
+							<div class="row-fluid">
+								cccccccccccccc
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--End-Chart-box-->
+			</div>
+			<!--end-main-container-part-->
+</section>
+</body>
+</html>

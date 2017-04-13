@@ -22,16 +22,16 @@ public class User implements Serializable {
 	private String password;
 	private String email;
 	private int userEnabled;
-	private int userCreator;
+	private Long userCreator;
 	private Date dateCreation;
-	private int userUpdator;
+	private Long userUpdator;
 	private Date dateUpdate;
 
 	@OneToMany(mappedBy = "user")
 	private Collection<Privilege> privileges;
 
-	public User(String username, String password,String email, int userEnabled, int userCreator, Date dateCreation,
-			int userUpdator, Date dateUpdate) {
+	public User(String username, String password,String email, int userEnabled, Long userCreator, Date dateCreation,
+			Long userUpdator, Date dateUpdate) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -80,11 +80,11 @@ public class User implements Serializable {
 		this.userEnabled = userEnabled;
 	}
 
-	public int getUserCreator() {
+	public Long getUserCreator() {
 		return userCreator;
 	}
 
-	public void setUserCreator(int userCreator) {
+	public void setUserCreator(Long userCreator) {
 		this.userCreator = userCreator;
 	}
 
@@ -96,11 +96,11 @@ public class User implements Serializable {
 		this.dateCreation = dateCreation;
 	}
 
-	public int getUserUpdator() {
+	public Long getUserUpdator() {
 		return userUpdator;
 	}
 
-	public void setUserUpdator(int userUpdator) {
+	public void setUserUpdator(Long userUpdator) {
 		this.userUpdator = userUpdator;
 	}
 

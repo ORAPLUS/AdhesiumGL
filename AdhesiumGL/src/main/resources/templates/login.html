@@ -17,22 +17,22 @@
 </head>
 <body th:dir="#{template.direction}">
 	<div id="loginbox">
-		<div class="alert alert-error" th:if="${param.error}">
+		<div class="alert alert-error" th:if="${param.error}" th:style="#{style.alert.design}">
 			<button class="close" data-dismiss="alert">×</button>
 			<strong th:text="#{template.message.login.error.label}"></strong> <label
 				th:text="#{template.message.login.error.text}"></label>
 		</div>
-		<div class="alert alert-success" th:if="${param.logout}">
+		<div class="alert alert-success" th:if="${param.logout}" th:style="#{style.alert.design}">
 			<button class="close" data-dismiss="alert">×</button>
 			<strong th:text="#{template.message.login.success.label}"></strong> <label
 				th:text="#{template.message.login.success.text}"></label>
 		</div>
-		<div class="alert alert-info" th:if="${forgot} == true">
+		<div class="alert alert-info" th:if="${forgot} == true" th:style="#{style.alert.design}">
 			<button class="close" data-dismiss="alert">×</button>
 			<strong th:text="#{template.message.login.info.label}"></strong> <label
 				th:text="#{template.message.login.info.text}"></label>
 		</div>
-		<div class="alert alert-error" th:if="${forgot} == false">
+		<div class="alert alert-error" th:if="${forgot} == false" th:style="#{style.alert.design}">
 			<button class="close" data-dismiss="alert">×</button>
 			<strong th:text="#{template.message.login.error.notfound.label}"></strong>
 			<label th:text="#{template.message.login.error.notfound.text}"></label>
