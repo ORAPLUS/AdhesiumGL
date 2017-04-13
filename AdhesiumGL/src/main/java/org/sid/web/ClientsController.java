@@ -9,7 +9,7 @@ public class ClientsController {
 	
 	@RequestMapping(value ="/pck_gestion.clients/display_clients")
 	public String display_clients(Model model){
-		model.addAttribute("classActiveSettings","1");
+		model.addAttribute("display_clients",true);
 		return "pck_gestion.clients/display_clients";
 	}
 

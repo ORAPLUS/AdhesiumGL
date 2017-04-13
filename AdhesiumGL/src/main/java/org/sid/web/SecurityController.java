@@ -24,7 +24,8 @@ public class SecurityController {
 	}
 
 	@RequestMapping(value = "/")
-	public String home() {
+	public String home(Model model) {
+		model.addAttribute("index",true);
 		return "index";
 	}
 	
