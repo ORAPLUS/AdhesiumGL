@@ -3,38 +3,79 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="master">
 <head>
-<title th:text="#{title.page.home}"></title>
+<title th:text="#{title.page.liste.client}"></title>
 </head>
 <body>
 	<section id="content" layout:fragment="content">
-	<!--main-container-part-->
-			<!--breadcrumbs-->
-			<div id="content-header">
-				<div id="breadcrumb">
-					<a th:href="@{/}" th:title="#{template.home.text}"
-						class="tip-bottom"><i class="icon-home"></i> <span
-						th:text="#{template.home.text}"></span></a>
-				</div>
+		<!--main-container-part-->
+		<!--breadcrumbs-->
+		<div id="content-header">
+			<div id="breadcrumb">
+				<a th:href="@{/}" th:title="#{template.home.text}"
+					class="tip-bottom"><i class="icon-home"></i> <span
+					th:text="#{template.home.text}"></span></a> 
+					<a th:href="@{/pck_gestion.clients/display_clients}"
+					th:title="#{template.liste.clients.text}" class="tip-bottom"><i
+					class="icon-group"></i> <span th:text="#{template.liste.clients.text}"></span></a>
 			</div>
-			<!--End-breadcrumbs-->
-			<!--Action boxes-->
-			<div class="container-fluid">
-				<div class="row-fluid">
-					<div class="widget-box">
-						<div class="widget-title bg_lg">
-							<span class="icon"><i class="icon-star"></i></span>
-							<h5 th:text="#{template.menu.fast}"></h5>
-						</div>
-						<div class="widget-content">
-							<div class="row-fluid">
-								cccccccccccccc
-							</div>
-						</div>
+		</div>
+		<!--End-breadcrumbs-->
+		<!--Action boxes-->
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="widget-box">
+					<div class="widget-title bg_lg">
+						<span class="icon"><i class="icon-th"></i></span>
+						<h5 th:text="#{template.liste.clients.text}"></h5>
+					</div>
+					<div class="widget-content">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>Rendering engine</th>
+									<th>Browser</th>
+									<th>Platform(s)</th>
+									<th>Engine version</th>
+									<th>CSS grade</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="odd gradeX">
+									<td>Trident</td>
+									<td>Internet Explorer 4.0</td>
+									<td>Win 95+</td>
+									<td class="center">4</td>
+									<td class="center">X</td>
+								</tr>
+								<tr class="even gradeC">
+									<td>Trident</td>
+									<td>Internet Explorer 5.0</td>
+									<td>Win 95+</td>
+									<td class="center">5</td>
+									<td class="center">C</td>
+								</tr>
+								<tr class="odd gradeA">
+									<td>Trident</td>
+									<td>Internet Explorer 5.5</td>
+									<td>Win 95+</td>
+									<td class="center">5.5</td>
+									<td class="center">A</td>
+								</tr>
+								<tr class="even gradeA">
+									<td>Trident</td>
+									<td>Internet Explorer 6</td>
+									<td>Win 98+</td>
+									<td class="center">6</td>
+									<td class="center">A</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
-				<!--End-Chart-box-->
 			</div>
-			<!--end-main-container-part-->
-</section>
+			<!--End-Chart-box-->
+		</div>
+		<!--end-main-container-part-->
+	</section>
 </body>
 </html>
