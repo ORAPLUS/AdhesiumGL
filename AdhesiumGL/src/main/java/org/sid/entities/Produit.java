@@ -3,12 +3,12 @@ package org.sid.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="t_produits")
@@ -16,7 +16,7 @@ public class Produit implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
-	private Long id_produit;
+	private Long idProduit;
 	private String nom;
 	private Long userCreator;
 	private Date dateCreation;
@@ -38,12 +38,13 @@ public class Produit implements Serializable{
 		this.dateUpdate = dateUpdate;
 	}
 
-	public Long getId_produit() {
-		return id_produit;
+
+	public Long getIdProduit() {
+		return idProduit;
 	}
 
-	public void setId_produit(Long id_produit) {
-		this.id_produit = id_produit;
+	public void setIdProduit(Long idProduit) {
+		this.idProduit = idProduit;
 	}
 
 	public String getNom() {
@@ -85,7 +86,7 @@ public class Produit implements Serializable{
 	public void setDateUpdate(Date dateUpdate) {
 		this.dateUpdate = dateUpdate;
 	}
-
+	@JsonIgnore
 	public Collection<Panier> getPaniers() {
 		return paniers;
 	}

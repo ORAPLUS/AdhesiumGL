@@ -1,9 +1,9 @@
-package org.sid.web;
+package org.sid.controllers;
 
 import javax.mail.MessagingException;
 
+import org.sid.configuration.SmtpMailServices;
 import org.sid.dao.UserRepository;
-import org.sid.services.SmtpMailServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +17,14 @@ public class SecurityController {
 	@Autowired
 	private SmtpMailServices smtpMailSender;
 	
+	@RequestMapping(value="/pck_clients/display_clients")
+	public String pck_clients(Model model) {
+		model.addAttribute("display_clients",true);
+		return "/pck_clients/display_clients";
+	}
+	
 	@RequestMapping(value = "/login")
 	public String login(Model model) {
-		model.addAttribute("","");
 		return "login";
 	}
 

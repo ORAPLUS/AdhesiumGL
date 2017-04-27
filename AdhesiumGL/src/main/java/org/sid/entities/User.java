@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "t_users")
@@ -17,7 +18,7 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long id_user;
+	private Long idUser;
 	private String username;
 	private String password;
 	private String email;
@@ -47,13 +48,12 @@ public class User implements Serializable {
 		super();
 	}
 
-	
-	public Long getId_user() {
-		return id_user;
+	public Long getIdUser() {
+		return idUser;
 	}
 
-	public void setId_user(Long id_user) {
-		this.id_user = id_user;
+	public void setIdUser(Long idUser) {
+		this.idUser = idUser;
 	}
 
 	public String getUsername() {
@@ -111,7 +111,7 @@ public class User implements Serializable {
 	public void setDateUpdate(Date dateUpdate) {
 		this.dateUpdate = dateUpdate;
 	}
-
+	@JsonIgnore
 	public Collection<Privilege> getPrivileges() {
 		return privileges;
 	}

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="t_roles")
@@ -16,8 +17,8 @@ public class Role implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue
-	private Long id_role;
-	private String nom_role;
+	private Long idRole;
+	private String nomRole;
 	private int enabled;
 	private Long userCreator;
 	private Date dateCreation;
@@ -27,9 +28,9 @@ public class Role implements Serializable{
 	@OneToMany(mappedBy="role")
 	private Collection<Privilege> privileges;
 	
-	public Role(String nom_role, int enabled, Long userCreator, Date dateCreation, Long userUpdator, Date dateUpdate) {
+	public Role(String nomRole, int enabled, Long userCreator, Date dateCreation, Long userUpdator, Date dateUpdate) {
 		super();
-		this.nom_role = nom_role;
+		this.nomRole = nomRole;
 		this.enabled = enabled;
 		this.userCreator = userCreator;
 		this.dateCreation = dateCreation;
@@ -41,20 +42,21 @@ public class Role implements Serializable{
 		super();
 	}
 
-	public Long getId_role() {
-		return id_role;
+
+	public Long getIdRole() {
+		return idRole;
 	}
 
-	public void setId_role(Long id_role) {
-		this.id_role = id_role;
+	public void setIdRole(Long idRole) {
+		this.idRole = idRole;
 	}
 
-	public String getNom_role() {
-		return nom_role;
+	public String getNomRole() {
+		return nomRole;
 	}
 
-	public void setNom_role(String nom_role) {
-		this.nom_role = nom_role;
+	public void setNomRole(String nomRole) {
+		this.nomRole = nomRole;
 	}
 
 	public int getEnabled() {
@@ -96,7 +98,7 @@ public class Role implements Serializable{
 	public void setDateUpdate(Date dateUpdate) {
 		this.dateUpdate = dateUpdate;
 	}
-
+	@JsonIgnore
 	public Collection<Privilege> getPrivileges() {
 		return privileges;
 	}

@@ -2,37 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title th:text="#{title.page.login}"></title>
-<meta charset="utf-8" />
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" href="../static/css/bootstrap.min.css"
 	th:href="@{/css/bootstrap.min.css}" />
-<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" href="../static/css/bootstrap-responsive.min.css"
 	th:href="@{/css/bootstrap-responsive.min.css}" />
-<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" href="../static/css/matrix-login.css"
 	th:href="@{/css/matrix-login.css}" />
-<link rel="stylesheet" type="text/css"
-	th:href="@{/font-awesome/css/font-awesome.css}" />
-<link rel="stylesheet" type="text/css"
-	href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,800" />
+<link href="../static/font-awesome/css/font-awesome.css"
+	rel="stylesheet" th:href="@{/font-awesome/css/font-awesome.css}" />
+<link
+	href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,800"
+	rel="stylesheet" type="text/css" />
 </head>
 <body th:dir="#{template.direction}">
 	<div id="loginbox">
-		<div class="alert alert-error" th:if="${param.error}" th:style="#{style.alert.design}">
+		<div class="alert alert-error" th:if="${param.error}"
+			th:style="#{style.alert.design}">
 			<button class="close" data-dismiss="alert">×</button>
 			<strong th:text="#{template.message.login.error.label}"></strong> <label
 				th:text="#{template.message.login.error.text}"></label>
 		</div>
-		<div class="alert alert-success" th:if="${param.logout}" th:style="#{style.alert.design}">
+		<div class="alert alert-success" th:if="${param.logout}"
+			th:style="#{style.alert.design}">
 			<button class="close" data-dismiss="alert">×</button>
 			<strong th:text="#{template.message.login.success.label}"></strong> <label
 				th:text="#{template.message.login.success.text}"></label>
 		</div>
-		<div class="alert alert-info" th:if="${forgot} == true" th:style="#{style.alert.design}">
+		<div class="alert alert-info" th:if="${forgot} == true"
+			th:style="#{style.alert.design}">
 			<button class="close" data-dismiss="alert">×</button>
 			<strong th:text="#{template.message.login.info.label}"></strong> <label
 				th:text="#{template.message.login.info.text}"></label>
 		</div>
-		<div class="alert alert-error" th:if="${forgot} == false" th:style="#{style.alert.design}">
+		<div class="alert alert-error" th:if="${forgot} == false"
+			th:style="#{style.alert.design}">
 			<button class="close" data-dismiss="alert">×</button>
 			<strong th:text="#{template.message.login.error.notfound.label}"></strong>
 			<label th:text="#{template.message.login.error.notfound.text}"></label>
@@ -107,10 +112,9 @@
 		</form>
 	</div>
 
-	<script th:src="@{/js/jquery.min.js}"></script>
-	<script th:src="@{/js/matrix.login.js}"></script>
-	<script th:src="@{/js/jquery.ui.custom.js}"></script>
-	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/jquery.min.js}" src="../static/js/jquery.min.js"></script>
+	<script th:src="@{/js/matrix.login.js}"
+		src="../static/js/matrix.login.js"></script>
 </body>
 
 </html>

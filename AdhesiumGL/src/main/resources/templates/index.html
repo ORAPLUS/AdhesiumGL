@@ -4,10 +4,11 @@
 	layout:decorator="master">
 <head>
 <title th:text="#{title.page.home}"></title>
+<meta charset="UTF-8" />
 </head>
 <body>
 	<section id="content" layout:fragment="content">
-	<!--main-container-part-->
+		<!--main-container-part-->
 		<!--breadcrumbs-->
 		<div id="content-header">
 			<div id="breadcrumb">
@@ -18,62 +19,61 @@
 		</div>
 		<!--End-breadcrumbs-->
 		<!--Action boxes-->
-			<div class="container-fluid">
-				<div class="row-fluid">
-					<div class="widget-box">
-						<div class="widget-title bg_lg">
-							<span class="icon"><i class="icon-star"></i></span>
-							<h5 th:text="#{template.menu.fast}"></h5>
-						</div>
-						<div class="widget-content">
-							<div class="row-fluid">
-								<div class="quick-actions_homepage">
-									<ul class="quick-actions">
-										<li class="bg_ls"><a href="#"> <i
-												class="icon-dashboard"></i> <span
-												class="label label-important">20</span> Menu rapide 1
-										</a></li>
-										<li class="bg_ls"><a href="#"> <i class="icon-signal"></i>
-												Menu rapide 2
-										</a></li>
-										<li class="bg_ls"><a href="#"> <i class="icon-inbox"></i><span
-												class="label label-important">10</span> Menu rapide 3
-										</a></li>
-										<li class="bg_ls"><a href="#"> <i class="icon-th"></i>
-												Menu rapide 4
-										</a></li>
-										<li class="bg_ls"><a href="#"> <i
-												class="icon-fullscreen"></i> Menu rapide 5
-										</a></li>
-										<li class="bg_ls"><a href="#"> <i
-												class="icon-th-list"></i> Menu rapide 6
-										</a></li>
-										<li class="bg_ls"><a href="#"> <i class="icon-tint"></i>
-												Menu rapide 7
-										</a></li>
-										<li class="bg_ls"><a href="#"> <i class="icon-pencil"></i>
-												Menu rapide 8
-										</a></li>
-										<li class="bg_ls"><a href="#"> <i
-												class="icon-calendar"></i> Menu rapide 9
-										</a></li>
-										<li class="bg_ls"><a href="#"> <i
-												class="icon-info-sign"></i> Menu rapide 10
-										</a></li>
-										<li class="bg_lh"><a th:href="@{/login?logout}"> <i
-												class="icon icon-share-alt"></i> <span
-												th:text="#{template.top.header.menu.deconnecter}"></span>
-										</a></li>
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="widget-box">
+					<div class="widget-title bg_lg">
+						<span class="icon"><i class="icon-star"></i></span>
+						<h5 th:text="#{template.menu.fast}"></h5>
+					</div>
+					<div class="widget-content">
+						<div class="row-fluid">
+							<div class="quick-actions_homepage">
+								<ul class="quick-actions">
+									<li class="bg_ls"><a th:href="@{/pck_clients/display_clients}"> <i
+											class="icon-group"></i>  Ajouter un client
+									</a></li>
+									<li class="bg_lb"><a href="#"> <i class="icon-signal"></i>
+											Menu rapide 2
+									</a></li>
+									<li class="bg_lg"><a href="#"> <i class="icon-inbox"></i><span
+											class="label label-important">10</span> Menu rapide 3
+									</a></li>
+									<li class="bg_ly"><a href="#"> <i class="icon-th"></i>
+											Menu rapide 4
+									</a></li>
+									<li class="bg_lo"><a href="#"> <i
+											class="icon-fullscreen"></i> Menu rapide 5
+									</a></li>
+									<li class="bg_lb"><a href="#"> <i class="icon-th-list"></i>
+											Menu rapide 6
+									</a></li>
+									<li class="bg_lr"><a href="#"> <i class="icon-tint"></i>
+											Menu rapide 7
+									</a></li>
+									<li class="bg_lg"><a href="#"> <i class="icon-pencil"></i>
+											Menu rapide 8
+									</a></li>
+									<li class="bg_lo"><a href="#"> <i
+											class="icon-calendar"></i> Menu rapide 9
+									</a></li>
+									<li class="bg_ls"><a href="#"> <i
+											class="icon-info-sign"></i> Menu rapide 10
+									</a></li>
+									<li class="bg_lh"><a th:href="@{/login?logout}"> <i
+											class="icon icon-share-alt"></i> <span
+											th:text="#{template.top.header.menu.deconnecter}"></span>
+									</a></li>
 
-									</ul>
-								</div>
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!--End-Chart-box-->
 			</div>
-			<!--end-main-container-part-->
-</section>
+			<!--End-Chart-box-->
+		</div>
+		<!--end-main-container-part-->
+	</section>
 </body>
 </html>

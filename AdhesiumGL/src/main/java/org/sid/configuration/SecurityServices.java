@@ -1,4 +1,4 @@
-package org.sid.services;
+package org.sid.configuration;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +31,10 @@ public class SecurityServices extends WebSecurityConfigurerAdapter {
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable();
 		http.formLogin().loginPage("/login");
 		http.authorizeRequests().antMatchers("/").hasRole("USER");
 		//http.authorizeRequests().antMatchers("/","/taxes").hasRole("ADMIN");
-		http.exceptionHandling().accessDeniedPage("/login");
+		//http.exceptionHandling().accessDeniedPage("/login");
 	}
 }

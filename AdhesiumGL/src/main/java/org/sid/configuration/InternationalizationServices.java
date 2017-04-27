@@ -1,4 +1,4 @@
-package org.sid.services;
+package org.sid.configuration;
 
 import java.util.Locale;
 

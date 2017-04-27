@@ -1,4 +1,4 @@
-package org.sid.services;
+package org.sid.configuration;
 
 import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;

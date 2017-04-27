@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="t_privileges")
@@ -16,17 +17,17 @@ public class Privilege implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue
-	private Long id;
+	private Long idPrivilege;
 	private Long userCreator;
 	private Date dateCreation;
 	private Long userUpdator;
 	private Date dateUpdate;
 
 	@ManyToOne
-	@JoinColumn(name="id_user")
+	@JoinColumn(name="idUser")
 	private User user;
 	@ManyToOne
-	@JoinColumn(name="id_role")
+	@JoinColumn(name="idRole")
 	private Role role;
 	
 	public Privilege() {
@@ -43,12 +44,14 @@ public class Privilege implements Serializable {
 		this.role = role;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getIdPrivilege() {
+		return idPrivilege;
 	}
-	public void setId(Long id) {
-		this.id = id;
+
+	public void setIdPrivilege(Long idPrivilege) {
+		this.idPrivilege = idPrivilege;
 	}
+
 	public Long getUserCreator() {
 		return userCreator;
 	}
@@ -73,12 +76,14 @@ public class Privilege implements Serializable {
 	public void setDateUpdate(Date dateUpdate) {
 		this.dateUpdate = dateUpdate;
 	}
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
 	}
+	@JsonIgnore
 	public Role getRole() {
 		return role;
 	}

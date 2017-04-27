@@ -3,12 +3,15 @@ package org.sid.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="t_clients")
@@ -16,10 +19,11 @@ public class Client implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
-	private Long id_client;
+	private Long idClient;
+	@NotEmpty(message="nom ne doit pas etre null")
 	private String nom;
-	private String tel_portable;
-	private String tel_fix;
+	private String telPortable;
+	private String telFixe;
 	private String email;
 	private String commentaire;
 	private String remarque;
@@ -36,12 +40,12 @@ public class Client implements Serializable {
 		super();
 	}
 
-	public Client(String nom, String tel_portable, String tel_fix, String email, String commentaire, String remarque,
+	public Client(String nom, String telPortable, String telFixe, String email, String commentaire, String remarque,
 			String logo, Long userCreator, Date dateCreation, Long userUpdator, Date dateUpdate) {
 		super();
 		this.nom = nom;
-		this.tel_portable = tel_portable;
-		this.tel_fix = tel_fix;
+		this.telPortable = telPortable;
+		this.telFixe = telFixe;
 		this.email = email;
 		this.commentaire = commentaire;
 		this.remarque = remarque;
@@ -60,20 +64,29 @@ public class Client implements Serializable {
 		this.nom = nom;
 	}
 
-	public String getTel_portable() {
-		return tel_portable;
+
+	public Long getIdClient() {
+		return idClient;
 	}
 
-	public void setTel_portable(String tel_portable) {
-		this.tel_portable = tel_portable;
+	public void setIdClient(Long idClient) {
+		this.idClient = idClient;
 	}
 
-	public String getTel_fix() {
-		return tel_fix;
+	public String getTelPortable() {
+		return telPortable;
 	}
 
-	public void setTel_fix(String tel_fix) {
-		this.tel_fix = tel_fix;
+	public void setTelPortable(String telPortable) {
+		this.telPortable = telPortable;
+	}
+
+	public String getTelFixe() {
+		return telFixe;
+	}
+
+	public void setTelFixe(String telFixe) {
+		this.telFixe = telFixe;
 	}
 
 	public String getEmail() {
@@ -140,14 +153,7 @@ public class Client implements Serializable {
 		this.dateUpdate = dateUpdate;
 	}
 
-	public Long getId_client() {
-		return id_client;
-	}
-
-	public void setId_client(Long id_client) {
-		this.id_client = id_client;
-	}
-
+	@JsonIgnore
 	public Collection<Panier> getPaniers() {
 		return paniers;
 	}
@@ -155,9 +161,5 @@ public class Client implements Serializable {
 	public void setPaniers(Collection<Panier> paniers) {
 		this.paniers = paniers;
 	}
-	
-	
-	
-	
 
 }
