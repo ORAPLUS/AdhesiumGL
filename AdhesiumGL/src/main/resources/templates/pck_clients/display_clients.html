@@ -33,9 +33,44 @@
 							<span class="icon"><i class="icon-star"></i></span>
 							<h5>Formulaire de traitement</h5>
 						</div>
-						<div class="widget-content nopadding in collapse" id="collapseOne">
+						<div class="widget-content nopadding in collapse" id="collapseOne"
+							ng-show="enableCrop">
 							<input type="hidden" ng-model="client.idClient" />
 							<form name="myForm" class="form-horizontal">
+								<div class="control-group">
+									<div class="span6">
+										<div class="control-group">
+											<label class="control-label">Logo</label>
+											<div class="controls">
+												<input type="file" id="fileInput" name="fileInput"
+													ng-init="enableCrop=true" accept="image/*"
+													ngf-max-size="2MB" ngf-model-invalid="errorFile" /> <i
+													ng-show="myForm.fileInput.$error.maxSize">File too
+													large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+												<button class="btn btn-success" ng-click="imageDataURI=''">
+													<i class="icon-repeat"></i> Vider
+												</button>
+												<span class="help-block" id="spanpx">* Max: 2MB |
+													Taille: 128x128 px | Type: png, jpg, jpeg.</span>
+												<div class="uploadfilediv">
+													<img ng-src="{{resImageDataURI}}" width="128" height="128" />
+												</div>
+												<!-- <button ng-click="uploadImage()">upload image</button> -->
+											</div>
+										</div>
+									</div>
+									<div class="span6">
+										<div ng-if="enableCrop" class="cropAreasmall">
+											<img-crop image="imageDataURI"
+												result-image="$parent.resImageDataURI" change-on-fly="true"
+												area-type="circle" area-min-size="selMinSize"
+												result-image-size="resImgSize"
+												on-change="onChange($dataURI)" on-load-begin="onLoadBegin()"
+												on-load-done="onLoadDone()" on-load-error="onLoadError()"></img-crop>
+										</div>
+									</div>
+								</div>
+
 								<div class="control-group">
 									<label class="control-label">Nom<span
 										class="help-inline">*</span></label>
@@ -71,14 +106,7 @@
 											id="email" class="span4" />
 									</div>
 								</div>
-								<div class="control-group">
-									<label class="control-label">Logo</label>
-									<div class="controls">
-										<input type="file" ng-model="client.logo" name="logo"
-											id="logo" /> <i class="icon-info-sign"></i> <span
-											id="spanpx">100x100 px (png, jpg, jpeg, gif)</span>
-									</div>
-								</div>
+
 								<div class="control-group">
 									<label for="normal" class="control-label">Remarque</label>
 									<div class="controls">
@@ -214,7 +242,8 @@
 								<tbody>
 									<tr ng-repeat="client in clients | orderBy:myorder">
 										<td>{{client.idClient}}</td>
-										<td>{{client.nom}}</td>
+										<td><img width="60" height="60" alt="User"
+											th:src="@{/img/demo/logo.png}" /> {{client.nom}}</td>
 										<td>{{client.telPortable}}</td>
 										<td>{{client.telFixe}}</td>
 										<td>{{client.email}}</td>
@@ -238,6 +267,15 @@
 			th:src="@{/js/angular.min.js}"></script>
 		<script src="../../static/js/sweetalert.min.js"
 			th:src="@{/js/sweetalert.min.js}"></script>
+		<script
+			src="../../static/node_modules/ng-img-crop/compile/unminified/ng-img-crop.js"
+			th:src="@{/node_modules/ng-img-crop/compile/unminified/ng-img-crop.js}"></script>
+		<script
+			src="../../static/node_modules/ng-file-upload/dist/ng-file-upload.min.js"
+			th:src="@{/node_modules/ng-file-upload/dist/ng-file-upload.min.js}"></script>
+		<script
+			src="../../static/node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"
+			th:src="@{/node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js}"></script>
 		<script src="../../static/controller/ClientController.js"
 			th:src="@{/controller/ClientController.js}"></script>
 	</section>

@@ -30,7 +30,7 @@ public class ClientRestController {
 			@RequestParam(value = "sort", defaultValue = "idClient") @ApiPathParam(name = "sort") String sort,
 			@RequestParam(value = "option", defaultValue = "ASC") @ApiPathParam(name = "option") Direction option,
 			@RequestParam(value = "page", defaultValue = "0") @ApiPathParam(name = "page") int page,
-			@RequestParam(value = "size", defaultValue = "25") @ApiPathParam(name = "size") int size) {
+			@RequestParam(value = "size", defaultValue = "10") @ApiPathParam(name = "size") int size) {
 		return clientServices.chercher(mc, sort, option, page, size);
 	}
 

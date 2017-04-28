@@ -23,6 +23,12 @@ public class SecurityController {
 		return "/pck_clients/display_clients";
 	}
 	
+	@RequestMapping(value="/pck_produits/display_produits")
+	public String pck_produits(Model model) {
+		model.addAttribute("display_produits",true);
+		return "/pck_produits/display_produits";
+	}
+	
 	@RequestMapping(value = "/login")
 	public String login(Model model) {
 		return "login";

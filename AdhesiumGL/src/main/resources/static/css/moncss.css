@@ -1,16 +1,38 @@
-#lipage{
+#lipage {
 	background: #F9F9F9;
-    border-radius: 20px;
+	border-radius: 20px;
 }
-#lilipage{
+
+#lilipage {
 	width: 100px;
 }
-.widget-title{
-cursor: pointer;
+
+.widget-title {
+	cursor: pointer;
 }
-#spanpx{
-	color:#D31228;
+
+#spanpx {
+	color: #D31228;
 }
-.help-inline{
-	color:#D31228;
+
+.help-inline {
+	color: #D31228;
+}
+
+.uploadfilediv {
+	background: #F8F8F8;
+	border: 5px dashed #DDD;
+	width: 250px;
+	text-align: center;
+	padding: 10px 10px;
+}
+
+.cropAreasmall {
+	background: #E4E4E4;
+	margin: auto;
+	overflow: hidden;
+	width: 280px;
+	height: 200px;
+	margin-top: 20px;
+    margin-left: 30px;
 }

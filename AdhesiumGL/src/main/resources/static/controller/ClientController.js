@@ -1,8 +1,9 @@
 "use strict";
 
 var urlBase = "http://localhost:8080";
+var app = angular.module('myApp', ['ngFileUpload', 'ngImgCrop']);
 
-angular.module('myApp', []).controller("ClientController", function($scope, $http) {
+app.controller("ClientController", function MyController($scope, $http) {
 	$scope.motCle = "";
 	$scope.pageCourante = 0;
 	$scope.pageCouranteText = 1;
@@ -16,24 +17,6 @@ angular.module('myApp', []).controller("ClientController", function($scope, $htt
 	}, {
 		value : 'DESC'
 	} ];
-	$scope.steps = [ {
-		value : '10'
-	}, {
-		value : '25'
-	}, {
-		value : '50'
-	}, {
-		value : '100'
-	} ];
-	
-	$scope.submitForm = function(isValid) {
-
-		// check to make sure the form is completely valid
-		if (isValid) { 
-			alert('our form is amazing');
-		}
-
-	};
 	
 	$scope.orderby = function(clientOrder) {
 		if ($scope.sortColumn == clientOrder && $scope.sortOption == $scope.sortOptions[0].value) {
@@ -76,6 +59,44 @@ angular.module('myApp', []).controller("ClientController", function($scope, $htt
 		$scope.motCle = "";
 		$scope.getClients();
 	}
+/*Begin upload image*/
+	 $scope.sizeimg='small';
+     $scope.typeimg='circle';
+     $scope.imageDataURI='';
+     $scope.resImageDataURI='';
+     $scope.selMinSize=100;
+     $scope.resImgSize=200;
+     $scope.onChange=function($dataURI) {
+       console.log('onChange fired');
+     };
+     $scope.onLoadBegin=function() {
+       console.log('onLoadBegin fired');
+     };
+     $scope.onLoadDone=function() {
+       console.log('onLoadDone fired');
+     };
+     $scope.onLoadError=function() {
+       console.log('onLoadError fired');
+     };
+     var handleFileSelect=function(evt) {
+       var file=evt.currentTarget.files[0];
+       var reader = new FileReader();
+       reader.onload = function (evt) {
+         $scope.$apply(function($scope){
+           $scope.imageDataURI=evt.target.result;
+         });
+       };
+       reader.readAsDataURL(file);
+     };
+     angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+     $scope.$watch('resImageDataURI',function(){
+       //console.log('Res image', $scope.resImageDataURI);
+     });
+     
+     
+   
+/*Fin upload image*/
+	
 	$scope.sauvgarde = function() {
 		if (!$scope.client.idClient) {
 			$http.post(urlBase + "/clients/", $scope.client)

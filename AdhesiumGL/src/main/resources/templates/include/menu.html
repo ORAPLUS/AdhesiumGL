@@ -18,7 +18,8 @@
 			<li th:class="${isActive} ? active : ''"><a href="#"><i
 					class="icon icon-shopping-cart"></i> <span>Gestion des
 						Paniers</span></a></li>
-			<li th:class="${isActive} ? active : ''"><a href="#"><i
+			<li th:class="${display_produits} ? active : ''"><a
+				th:href="@{/pck_produits/display_produits}"><i
 					class="icon icon-key"></i> <span>Gestion des Produits</span></a></li>
 			<!-- <li class="submenu active open"> -->
 			<li th:class="${isActive} ? active : ''"><a href="#"><i

@@ -31,4 +31,22 @@ public class ResourceExceptionHandler {
 				e.getMessage());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 	}
+	// Produit
+		@ExceptionHandler(ProduitAlreadyExistException.class)
+		public ResponseEntity<Error> handlerClientAlreadyExistException(ProduitAlreadyExistException e,
+				HttpServletRequest request) {
+			e.printStackTrace();
+			Error error = new Error("Produit Already Exist.", 1002L, System.currentTimeMillis(),
+					"http://error.teste.com/1000", e.getMessage());
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+		}
+
+		@ExceptionHandler(ProduitNotFoundException.class)
+		public ResponseEntity<Error> handlerProduitNotFoundException(ProduitNotFoundException e,
+				HttpServletRequest request) {
+			e.printStackTrace();
+			Error error = new Error("Produit Not Found.", 1003L, System.currentTimeMillis(), "http://error.teste.com/1001",
+					e.getMessage());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+		}
 }

@@ -18,7 +18,7 @@ public class SmtpMailServices {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 			helper.setSubject(subject);
 			helper.setTo(to);
-			helper.setText(body, true);//true indicate HTML
+			helper.setText(body, true);
 			javaMailSender.send(message);
 		} catch (Exception e) {
 			e.printStackTrace();
