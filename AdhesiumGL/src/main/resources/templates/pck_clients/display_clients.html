@@ -33,8 +33,7 @@
 							<span class="icon"><i class="icon-star"></i></span>
 							<h5>Formulaire de traitement</h5>
 						</div>
-						<div class="widget-content nopadding in collapse" id="collapseOne"
-							ng-show="enableCrop">
+						<div class="widget-content nopadding in collapse" id="collapseOne">
 							<input type="hidden" ng-model="client.idClient" />
 							<form name="myForm" class="form-horizontal">
 								<div class="control-group">
@@ -42,32 +41,34 @@
 										<div class="control-group">
 											<label class="control-label">Logo</label>
 											<div class="controls">
-												<input type="file" id="fileInput" name="fileInput"
-													ng-init="enableCrop=true" accept="image/*"
-													ngf-max-size="2MB" ngf-model-invalid="errorFile" /> <i
-													ng-show="myForm.fileInput.$error.maxSize">File too
-													large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
-												<button class="btn btn-success" ng-click="imageDataURI=''">
-													<i class="icon-repeat"></i> Vider
-												</button>
-												<span class="help-block" id="spanpx">* Max: 2MB |
-													Taille: 128x128 px | Type: png, jpg, jpeg.</span>
+												<input type="file" ngf-select="checkImage($invalidFiles)"
+													ng-model="picFile" accept="image/*" ngf-max-width="1920"
+													ngf-max-height="1080" ngf-max-size="2MB"
+													ngf-pattern="'.jpeg,.jpg,.png,.gif'" /> <span
+													class="help-block" id="spanpx">
+													{{errFile.$error=="maxSize"?"Taille max:
+													":(errFile.$error=="pattern"?"Extensions autorisees:
+													":(errFile.$error=="maxWidth"?"Largeur max:
+													":(errFile.$error=="maxHeight"?"Hauteur max: ":"")))}}
+													{{errFile.$errorParam}}</span>
+													 <span
+													class="help-block" id="spanpx">* Taille max: 2MB |
+													Extensions autorisees: png, jpg, jpeg, gif</span>
 												<div class="uploadfilediv">
-													<img ng-src="{{resImageDataURI}}" width="128" height="128" />
+													<img ng-src="{{uploadFile}}" width="128" height="128"
+														name="uploadFile" th:alt="logo" th:title="logo" />
 												</div>
-												<!-- <button ng-click="uploadImage()">upload image</button> -->
 											</div>
 										</div>
 									</div>
 									<div class="span6">
-										<div ng-if="enableCrop" class="cropAreasmall">
-											<img-crop image="imageDataURI"
-												result-image="$parent.resImageDataURI" change-on-fly="true"
-												area-type="circle" area-min-size="selMinSize"
-												result-image-size="resImgSize"
-												on-change="onChange($dataURI)" on-load-begin="onLoadBegin()"
-												on-load-done="onLoadDone()" on-load-error="onLoadError()"></img-crop>
+										<div ngf-drop="ngf-drop" ng-model="picFile"
+											ngf-pattern="'.jpeg,.jpg,.png,.gif'" class="cropArea">
+											<img-crop change-on-fly="true" image="picFile  | ngfDataUrl"
+												result-image="uploadFile" ng-init="uploadFile=''">
+											</img-crop>
 										</div>
+										<button ng-click="uploadFiles(uploadFile, picFile.name)">Submit</button>
 									</div>
 								</div>
 

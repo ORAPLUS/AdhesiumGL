@@ -1,9 +1,10 @@
 "use strict";
 
 var urlBase = "http://localhost:8080";
+
 var app = angular.module('myApp', ['ngFileUpload', 'ngImgCrop']);
 
-app.controller("ClientController", function MyController($scope, $http) {
+app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', function ($scope, Upload, $timeout,$http) {
 	$scope.motCle = "";
 	$scope.pageCourante = 0;
 	$scope.pageCouranteText = 1;
@@ -29,7 +30,7 @@ app.controller("ClientController", function MyController($scope, $http) {
 			$scope.getClients();
 		}
 	}
-	//Liste Des Clients
+	// Liste Des Clients
 	$scope.listeDesClients = function() {
 		$http.get(urlBase + "/clients/chercherClients?mc="
 			+ $scope.motCle + "&sort=" + $scope.sortColumn + "&option=" + $scope.sortOption + "&page=" + (($scope.pageCourante <= 0) ? 0 : $scope.pageCourante) + "&size=" + $scope.size)
@@ -59,43 +60,6 @@ app.controller("ClientController", function MyController($scope, $http) {
 		$scope.motCle = "";
 		$scope.getClients();
 	}
-/*Begin upload image*/
-	 $scope.sizeimg='small';
-     $scope.typeimg='circle';
-     $scope.imageDataURI='';
-     $scope.resImageDataURI='';
-     $scope.selMinSize=100;
-     $scope.resImgSize=200;
-     $scope.onChange=function($dataURI) {
-       console.log('onChange fired');
-     };
-     $scope.onLoadBegin=function() {
-       console.log('onLoadBegin fired');
-     };
-     $scope.onLoadDone=function() {
-       console.log('onLoadDone fired');
-     };
-     $scope.onLoadError=function() {
-       console.log('onLoadError fired');
-     };
-     var handleFileSelect=function(evt) {
-       var file=evt.currentTarget.files[0];
-       var reader = new FileReader();
-       reader.onload = function (evt) {
-         $scope.$apply(function($scope){
-           $scope.imageDataURI=evt.target.result;
-         });
-       };
-       reader.readAsDataURL(file);
-     };
-     angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
-     $scope.$watch('resImageDataURI',function(){
-       //console.log('Res image', $scope.resImageDataURI);
-     });
-     
-     
-   
-/*Fin upload image*/
 	
 	$scope.sauvgarde = function() {
 		if (!$scope.client.idClient) {
@@ -151,7 +115,23 @@ app.controller("ClientController", function MyController($scope, $http) {
 					console.log(err);
 				});
 		});
-
-
 	}
-});
+	/* Begin upload image */
+	$scope.uploadFiles = function(file,filename) {
+        if (file) {
+            Upload.upload({
+                url: urlBase+'/api/clients',
+                data: {uploadFile: Upload.dataUrltoBlob(file,filename)}
+            }).then(function (response) {
+            	console.log(response.data);
+            }, function(err) {
+				sweetAlert("Error", err, "error");
+				console.log(err);
+			});
+        }   
+    }
+	 $scope.checkImage = function(errFiles) {
+	        $scope.errFile = errFiles && errFiles[0]; 
+	    }
+	/* End upload image */
+}]);
