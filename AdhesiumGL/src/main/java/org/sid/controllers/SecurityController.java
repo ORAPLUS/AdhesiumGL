@@ -43,7 +43,7 @@ public class SecurityController {
 	@RequestMapping(value="/forgot")
 	public String forget(Model model,String email) throws MessagingException{
 		if(userRepository.isExisteEmail(email)) {
-			smtpMailSender.send("sis.ayoub.youb@gmail.com", "test", "merci");
+			//smtpMailSender.send("sis.ayoub.youb@gmail.com", "test", "merci");
 			model.addAttribute("forgot",true);
 		}else{
 			model.addAttribute("forgot",false);

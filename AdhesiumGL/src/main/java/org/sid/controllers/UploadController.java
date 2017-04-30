@@ -28,25 +28,29 @@ public class UploadController {
 
 	@Autowired
 	private Environment env;
-
+	/*
+	 * Config : application.properties => upload.clients.file.path=C:/xampp/htdocs/temp/clients/
+	 * Affiche: display_clients        => ng:src="{{linkXampp}}{{client.logo}}"
+	 * ConfJS : ClientController       => linkXampp             
+	 * */
 	@RequestMapping(value = "/clients", headers = "content-type=multipart/*", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody HttpEntity<List<String>> uploadClients(@RequestParam("uploadFile") MultipartFile file) {
-		List<String> customerList = new ArrayList<String>();
-		String fileName = file.getOriginalFilename();
-		String extension = fileName.substring(fileName.lastIndexOf("."));
-		double randomName = Math.random();
-		String dateName = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 		try {
-			fileName = dateName + "." + randomName + extension;
-			customerList.add(fileName);
-			byte[] bytes = file.getBytes();
+			double randomName = Math.random();
+			String fileName = file.getOriginalFilename();
+			String extension = fileName.substring(fileName.lastIndexOf("."));
+			String dateName = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 			String directory = env.getProperty("upload.clients.file.path");
-			String uploadFilePath = Paths.get("." + File.separator + directory, fileName).toString();
+			fileName = dateName + "." + randomName + extension;
+			String uploadFilePath = Paths.get(directory, fileName).toString();
+			List<String> imageInfoList = new ArrayList<String>();
+			imageInfoList.add(fileName);
+			byte[] bytes = file.getBytes();
 			final BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(
 					new FileOutputStream(new File(uploadFilePath)));
 			bufferedOutputStream.write(bytes);
 			bufferedOutputStream.close();
-			return ResponseEntity.ok(customerList);
+			return ResponseEntity.ok(imageInfoList);
 		} catch (IOException e) {
 			return ResponseEntity.noContent().build();
 		}

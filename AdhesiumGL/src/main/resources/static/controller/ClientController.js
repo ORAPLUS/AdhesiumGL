@@ -6,12 +6,15 @@ var app = angular.module('myApp', ['ngFileUpload', 'ngImgCrop']);
 
 app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', function ($scope, Upload, $timeout,$http) {
 	$scope.motCle = "";
+	$scope.client = {};
+	$scope.linkXampp = "http://localhost:8001/temp/clients/";
 	$scope.pageCourante = 0;
 	$scope.pageCouranteText = 1;
 	$scope.totalPages = 0;
 	$scope.size = 10;
 	$scope.pages = [];
 	$scope.sortColumn = "idClient";
+	$scope.$timeout = $timeout;
 	$scope.sortOption = "ASC";
 	$scope.sortOptions = [ {
 		value : 'ASC'
@@ -55,6 +58,7 @@ app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', func
 	}
 	$scope.nouveau = function() {
 		$scope.client = {};
+		$scope.picFile=null;
 	}
 	$scope.nouveauSearch = function() {
 		$scope.motCle = "";
@@ -93,6 +97,7 @@ app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', func
 		$scope.client.logo = $scope.client.logo;
 		$scope.client.remarque = $scope.client.remarque;
 		$scope.client.commentaire = $scope.client.commentaire;
+		$scope.uploadFile= $scope.linkXampp+$scope.client.logo;
 	}
 	$scope.supprimer = function(clientSel) {
 		swal({
@@ -117,13 +122,16 @@ app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', func
 		});
 	}
 	/* Begin upload image */
-	$scope.uploadFiles = function(file,filename) {
+	$scope.uploadFiles = function() {
+		var file = $scope.uploadFile;
+		var filename = $scope.picFile.name;
         if (file) {
             Upload.upload({
                 url: urlBase+'/api/clients',
                 data: {uploadFile: Upload.dataUrltoBlob(file,filename)}
             }).then(function (response) {
-            	console.log(response.data);
+            	$scope.client.logo =  response.data[0];
+            	$scope.picFile=null;
             }, function(err) {
 				sweetAlert("Error", err, "error");
 				console.log(err);
