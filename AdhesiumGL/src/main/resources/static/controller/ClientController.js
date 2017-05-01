@@ -8,6 +8,8 @@ app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', func
 	$scope.motCle = "";
 	$scope.client = {};
 	$scope.linkXampp = "http://localhost:8001/temp/clients/";
+	$scope.defaultImg = "default.png";
+	$scope.client.logo = $scope.defaultImg;
 	$scope.pageCourante = 0;
 	$scope.pageCouranteText = 1;
 	$scope.totalPages = 0;
@@ -21,7 +23,7 @@ app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', func
 	}, {
 		value : 'DESC'
 	} ];
-	
+
 	$scope.orderby = function(clientOrder) {
 		if ($scope.sortColumn == clientOrder && $scope.sortOption == $scope.sortOptions[0].value) {
 			$scope.sortColumn = clientOrder;
@@ -58,7 +60,9 @@ app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', func
 	}
 	$scope.nouveau = function() {
 		$scope.client = {};
-		$scope.picFile=null;
+		$scope.client.logo = $scope.defaultImg;
+		$scope.picFile =undefined;
+		$('span.filename').text('Aucune image');
 	}
 	$scope.nouveauSearch = function() {
 		$scope.motCle = "";
@@ -97,7 +101,6 @@ app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', func
 		$scope.client.logo = $scope.client.logo;
 		$scope.client.remarque = $scope.client.remarque;
 		$scope.client.commentaire = $scope.client.commentaire;
-		$scope.uploadFile= $scope.linkXampp+$scope.client.logo;
 	}
 	$scope.supprimer = function(clientSel) {
 		swal({
@@ -122,24 +125,29 @@ app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', func
 		});
 	}
 	/* Begin upload image */
-	$scope.uploadFiles = function() {
-		var file = $scope.uploadFile;
-		var filename = $scope.picFile.name;
-        if (file) {
-            Upload.upload({
-                url: urlBase+'/api/clients',
-                data: {uploadFile: Upload.dataUrltoBlob(file,filename)}
-            }).then(function (response) {
-            	$scope.client.logo =  response.data[0];
-            	$scope.picFile=null;
-            }, function(err) {
-				sweetAlert("Error", err, "error");
-				console.log(err);
-			});
-        }   
-    }
-	 $scope.checkImage = function(errFiles) {
-	        $scope.errFile = errFiles && errFiles[0]; 
-	    }
+	 $scope.uploadPic = function(file) {
+		 if(file){
+		    file.upload = Upload.upload({
+		      url: urlBase+'/api/clients',
+		      data: {uploadFile: file},
+		    });
+
+		    file.upload.then(function (response) {
+		      $timeout(function () {
+		        file.result = response.data;
+		        $scope.client.logo =  response.data[0];
+		      });
+		    }, function (response) {
+		      if (response.status > 0)
+		        $scope.errorMsg = response.status + ': ' + response.data;
+		    });
+		 }
+		    }
+	 $scope.uploadPicAnnuler = function(){
+		 $scope.client.logo = $scope.defaultImg;
+		 $scope.picFile =undefined;
+		 $('span.filename').text('Aucune image');
+	 }
+	 
 	/* End upload image */
 }]);

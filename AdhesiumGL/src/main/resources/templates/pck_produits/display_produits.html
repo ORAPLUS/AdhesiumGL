@@ -19,7 +19,7 @@
 			<div id="breadcrumb">
 				<a th:href="@{/}" title="Accueil" class="tip-bottom"><i
 					class="icon-home"></i> Accueil</a> <a
-					th:href="@{/pck_clients/display_clients}"
+					th:href="@{/pck_clients/display_manage_clients}"
 					title="Gestion des Clients" class="tip-bottom"><i
 					class="icon-group"></i> Gestion des Clients</a>
 			</div>
@@ -34,40 +34,35 @@
 							<h5>Formulaire de traitement</h5>
 						</div>
 						<div class="widget-content nopadding in collapse" id="collapseOne">
-							<input type="hidden" ng-model="client.idClient" />
 							<form name="myForm" class="form-horizontal">
+								<input type="hidden" ng-model="client.idClient" /> <input
+									type="hidden" ng-model="client.logo" />
 								<div class="control-group">
-									<div class="span6">
-										<div class="control-group">
-											<label class="control-label">Logo</label>
-											<div class="controls">
-												<input type="file" ngf-select="checkImage($invalidFiles)"
-													ng-model="picFile" accept="image/*" ngf-max-width="1920"
-													ngf-max-height="1080" ngf-max-size="2MB"
-													ngf-pattern="'.jpeg,.jpg,.png,.gif'" /> <span
-													class="help-block" id="spanpx">
-													{{errFile.$error}}{{errFile.$errorParam}}{{errorMsg}} </span> <span
-													class="help-block" id="spanpx">* Max: 2MB | Type:
-													png, jpg, jpeg, gif.</span>
-												<div class="uploadfilediv">
-													<img ng-src="{{uploadFile}}" width="128" height="128"
-														name="uploadFile" ng-model="uploadFile" th:alt="logo"
-														th:title="logo" />
-												</div>
-											</div>
+									<label class="control-label">Logo</label>
+									<div class="controls">
+										<input type="file" ngf-select="ngf-select" ng-model="picFile"
+											name="file" accept="image/*" ngf-max-width="128"
+											ngf-max-height="128" ngf-max-size="2MB"
+											ngf-pattern="'.jpeg,.jpg,.png,.gif'"
+											ngf-model-invalid="errorFile" /> <a
+											ng-click="uploadPicAnnuler();" ng-show="picFile"
+											class="btn btn-danger btn-mini"><i class="icon-remove"></i></a>
+										<a ng-click="uploadPic(picFile);"
+											class="btn btn-success btn-mini"><i class="icon-ok"></i></a>
+										<div class="uploadfilediv">
+											<img ngf-src="picFile?picFile:linkXampp+client.logo"  width="128"
+												height="128" alt="logo" title="logo" />
 										</div>
-									</div>
-									<div class="span6">
-										<div ngf-drop="ngf-drop" ng-model="picFile"
-											ngf-pattern="'.jpeg,.jpg,.png,.gif'" class="cropArea">
-											<img-crop image="picFile  | ngfDataUrl"
-												result-image="uploadFile" ng-init="uploadFile=''">
-											</img-crop>
-										</div>
-										<button ng-click="uploadFiles(uploadFile, picFile.name)">Submit</button>
+										<span class="help-block" id="spanpx"> <i
+											ng-show="myForm.file.$error.maxSize">* Taille max: 2MB</i> <i
+											ng-show="myForm.file.$error.pattern">* Extensions
+												autorisees: .jpeg,.jpg,.png,.gif</i> <i
+											ng-show="myForm.file.$error.maxWidth">* Largeur max:
+												128px</i> <i ng-show="myForm.file.$error.maxHeight">*
+												Hauteur max: 128px</i> <i>{{errorMsg}}</i>
+										</span>
 									</div>
 								</div>
-
 								<div class="control-group">
 									<label class="control-label">Nom<span
 										class="help-inline">*</span></label>
@@ -123,9 +118,9 @@
 										ng-click="sauvgarde();">
 										<i class="icon-save"></i> Valider
 									</button>
-									<button class="btn btn-success" ng-click="nouveau();">
-										<i class="icon-repeat"></i> Vider
-									</button>
+									<a class="btn btn-success" ng-click="nouveau();"> <i
+										class="icon-repeat"></i> Annuler
+									</a>
 								</div>
 							</form>
 						</div>
@@ -187,7 +182,7 @@
 										<li id="lilipage">
 											<div class="controls" id="divlipage">
 												<input id="lipage" type="text" ng-model="pageCouranteText"
-													ng-change="gotoPage(pageCouranteText-1)" class="span6" />
+													ng-keyup="gotoPage(pageCouranteText-1)" class="span6" />
 												sur {{totalPages}}
 											</div>
 										</li>
@@ -204,10 +199,12 @@
 							<table class="table table-striped table-bordered">
 								<thead>
 									<tr>
+
 										<th style="cursor: pointer;" ng-click="orderby('idClient')">
 											<i
 											ng-class="{ 'icon-sort':sortColumn != 'idClient','icon-sort-up': (sortColumn == 'idClient' &amp;&amp; sortOption == 'DESC'), 'icon-sort-down' : (sortColumn == 'idClient' &amp;&amp; sortOption == 'ASC')}"></i>ID
 										</th>
+										<th>Logo</th>
 										<th style="cursor: pointer;" ng-click="orderby('nom')"><i
 											ng-class="{ 'icon-sort':sortColumn != 'nom','icon-sort-up': (sortColumn == 'nom' &amp;&amp; sortOption == 'DESC'), 'icon-sort-down' : (sortColumn == 'nom' &amp;&amp; sortOption == 'ASC')}"></i>Nom
 										</th>
@@ -239,8 +236,9 @@
 								<tbody>
 									<tr ng-repeat="client in clients | orderBy:myorder">
 										<td>{{client.idClient}}</td>
-										<td><img width="60" height="60" alt="User"
-											th:src="@{/img/demo/logo.png}" /> {{client.nom}}</td>
+										<td><img width="60" height="60" alt="{{client.nom}}"
+											title="{{client.nom}}" ng:src="{{linkXampp}}{{client.logo}}" /></td>
+										<td>{{client.nom}}</td>
 										<td>{{client.telPortable}}</td>
 										<td>{{client.telFixe}}</td>
 										<td>{{client.email}}</td>

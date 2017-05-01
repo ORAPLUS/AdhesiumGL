@@ -12,9 +12,18 @@
 		<ul>
 			<li th:class="${index} ? active : ''"><a th:href="@{/}"><i
 					class="icon icon-home"></i> <span th:text="#{template.home.text}"></span></a></li>
-			<li th:class="${display_clients} ? active : ''"><a
-				th:href="@{/pck_clients/display_clients}"><i
-					class="icon icon-group"></i> <span>Gestion des Clients</span></a></li>
+			<li th:class="${display_manage_clients} ? 'submenu open' : 'submenu'">
+				<a href="#"> <i class="icon-briefcase"></i> <span>Gestion
+						des Clients</span> <span class="label label-important">2</span></a>
+				<ul>
+					<li th:class="${display_manage_clients_active} ? 'active' : ''"><a
+						th:href="@{/pck_clients/display_manage_clients}"> <i
+							class="icon-plus"></i> Ajouter un client
+					</a></li>
+					<li th:class="${display_details_client_active} ? 'active' : ''">
+					<a th:href="@{/pck_clients/display_details_client}"><i class="icon-tasks"></i> Détails du client</a></li>
+				</ul>
+			</li>
 			<li th:class="${isActive} ? active : ''"><a href="#"><i
 					class="icon icon-shopping-cart"></i> <span>Gestion des
 						Paniers</span></a></li>
@@ -22,7 +31,7 @@
 				th:href="@{/pck_produits/display_produits}"><i
 					class="icon icon-key"></i> <span>Gestion des Produits</span></a></li>
 			<!-- <li class="submenu active open"> -->
-			<li th:class="${isActive} ? active : ''"><a href="#"><i
+			<li th:class="${isActive} ? active : 'submenu'"><a href="#"><i
 					class="icon icon-dashboard"></i> <span>Administration</span> <span
 					class="label label-important">3</span></a>
 				<ul>

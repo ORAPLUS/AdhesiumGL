@@ -6,12 +6,17 @@ var app = angular.module('myApp', ['ngFileUpload', 'ngImgCrop']);
 
 app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', function ($scope, Upload, $timeout,$http) {
 	$scope.motCle = "";
+	$scope.client = {};
+	$scope.linkXampp = "http://localhost:8001/temp/clients/";
+	$scope.defaultImg = "default.png";
+	$scope.client.logo = $scope.defaultImg;
 	$scope.pageCourante = 0;
 	$scope.pageCouranteText = 1;
 	$scope.totalPages = 0;
 	$scope.size = 10;
 	$scope.pages = [];
 	$scope.sortColumn = "idClient";
+	$scope.$timeout = $timeout;
 	$scope.sortOption = "ASC";
 	$scope.sortOptions = [ {
 		value : 'ASC'
@@ -30,7 +35,7 @@ app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', func
 			$scope.getClients();
 		}
 	}
-	//Liste Des Clients
+	// Liste Des Clients
 	$scope.listeDesClients = function() {
 		$http.get(urlBase + "/clients/chercherClients?mc="
 			+ $scope.motCle + "&sort=" + $scope.sortColumn + "&option=" + $scope.sortOption + "&page=" + (($scope.pageCourante <= 0) ? 0 : $scope.pageCourante) + "&size=" + $scope.size)
@@ -55,6 +60,9 @@ app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', func
 	}
 	$scope.nouveau = function() {
 		$scope.client = {};
+		$scope.client.logo = $scope.defaultImg;
+		$scope.picFile =undefined;
+		$('span.filename').text('Aucune image');
 	}
 	$scope.nouveauSearch = function() {
 		$scope.motCle = "";
@@ -116,28 +124,30 @@ app.controller('ClientController', ['$scope', 'Upload', '$timeout','$http', func
 				});
 		});
 	}
-	/*Begin upload image*/
-	$scope.uploadFiles = function(file,filename) {
-        if (file) {
-            file.upload = Upload.upload({
-                url: urlBase+'/api/clients',
-                data: {uploadFile: Upload.dataUrltoBlob(file,filename)}
-            });
+	/* Begin upload image */
+	 $scope.uploadPic = function(file) {
+		 if(file){
+		    file.upload = Upload.upload({
+		      url: urlBase+'/api/clients',
+		      data: {uploadFile: file},
+		    });
 
-            file.upload.then(function (response) {
-                $timeout(function () {
-                    file.result = response.data;
-                });
-            }, function (response) {
-                if (response.status > 0)
-                    $scope.errorMsg = response.status + ': ' + response.data;
-            }, function (evt) {
-                console.log(evt);
-            });
-        }   
-    }
-	 $scope.checkImage = function(errFiles) {
-	        $scope.errFile = errFiles && errFiles[0]; 
-	    }
-	/*  End upload image*/
+		    file.upload.then(function (response) {
+		      $timeout(function () {
+		        file.result = response.data;
+		        $scope.client.logo =  response.data[0];
+		      });
+		    }, function (response) {
+		      if (response.status > 0)
+		        $scope.errorMsg = response.status + ': ' + response.data;
+		    });
+		 }
+		    }
+	 $scope.uploadPicAnnuler = function(){
+		 $scope.client.logo = $scope.defaultImg;
+		 $scope.picFile =undefined;
+		 $('span.filename').text('Aucune image');
+	 }
+	 
+	/* End upload image */
 }]);
